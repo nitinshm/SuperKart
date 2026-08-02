@@ -3,19 +3,19 @@ import pandas as pd
 from flask import Flask, request, jsonify
 
 # Initialize Flask app
-superkart_api = Flask("SmartKart Store Sales Predictor")
+superkart_api = Flask("SuperKart Store Sales Predictor")
 
 # Load the trained Boston housing model
 model = joblib.load("store_sales_prediction_model_v1_0.joblib")
 
 # Define a route for the home page
-@house_price_api.get('/')
+@superkart_api.get('/')
 def home():
     return "Welcome to the SuperKart Store Sales Prediction API!"
 
 
 # Define an endpoint to predict price for a single house
-@house_price_api.post('/v1/predict')
+@superkart_api.post('/v1/predict')
 def predict_superkart():
     # Get JSON data from the request
     superkart_data = request.get_json()
@@ -43,7 +43,7 @@ def predict_superkart():
     return jsonify({'Predicted_MEDV': prediction})
 
 # Define an endpoint to predict price for a batch of houses
-@house_price_api.post('/v1/predictbatch')
+@superkart_api.post('/v1/predictbatch')
 def predict_superkart_batch():
     # Get the uploaded CSV file from the request
     file = request.files['file']
