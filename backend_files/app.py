@@ -22,7 +22,7 @@ def predict_superkart():
     superkart_data = request.get_json()
 
     # Extract relevant superkart features from the input data
-   sample = {
+    sample = {
     'Product_Weight': superkart_data['Product_Weight'],
     'Product_Allocated_Area': superkart_data['Product_Allocated_Area'],
     'Product_MRP': superkart_data['Product_MRP'],
