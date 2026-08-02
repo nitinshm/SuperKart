@@ -10,8 +10,8 @@ API_URL_PREDICT = API_URL + "/v1/predict"
 API_URL_PREDICT_BATCH = API_URL + "/v1/predictbatch"
 
 # Streamlit UI for Price Prediction
-st.title("SmartKart Store Sales Prediction App")
-st.write("This tool predicts the SmartKart Store Sales for each product.")
+st.title("SuperKart Store Sales Prediction App")
+st.write("This tool predicts the SuperKart Store Sales for each product.")
 
 st.subheader("Enter the details:")
 
@@ -20,11 +20,11 @@ Product_Weight = st.number_input("Product Weight", min_value=0.0, step=0.1, valu
 Product_Sugar_Content = st.selectbox("Product Sugar Content", ["Regular", "Low Sugar", "No Sugar"])
 Product_Allocated_Area = st.number_input("Product Allocated Area (ratio)", min_value=0.0, step=0.001, value=0.05, format="%.3f")
 Product_Type = st.selectbox("Product Type", [
-    "meat", "snack foods", "hard drinks", "dairy", "canned",
-    "soft drinks", "health and hygiene", "baking goods", "bread",
-    "breakfast", "frozen foods", "fruits and vegetables",
-    "household", "seafood", "starchy foods", "others"
+    "Baking Goods", "Breads", "Breakfast", "Canned", "Dairy", "Frozen Foods",
+    "Fruits and Vegetables", "Hard Drinks", "Health and Hygiene", "Household",
+    "Meat", "Others", "Seafood", "Snack Foods", "Soft Drinks", "Starchy Foods",
 ])
+
 Product_MRP = st.number_input("Product MRP", min_value=0.0, step=1.0, value=150.0)
 Store_Size = st.selectbox("Store Size", ["High", "Medium", "Small"])
 Store_Location_City_Type = st.selectbox("Store Location City Type", ["Tier 1", "Tier 2", "Tier 3"])
@@ -50,3 +50,19 @@ if st.button("Predict"):
         st.write(f"The predicted Store sale for the product is {prediction:.2f}.")
     else:
         st.error(f"API returned {response.status_code}: {response.text}")
+
+
+
+# Batch Prediction
+st.subheader("Batch Prediction")
+
+file = st.file_uploader("Upload CSV file", type=["csv"])
+if file is not None:
+    if st.button("Predict for Batch", type='primary'):
+        response = requests.post(f"{API_URL_PREDICT_BATCH}", files={"file": file})    # enter user name and space name before running the cell
+        if response.status_code == 200:
+            result = response.json()
+            st.header("Batch Prediction Results")
+            st.write(result)
+        else:
+            st.error("Error in API request")
