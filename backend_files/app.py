@@ -1,4 +1,5 @@
 import joblib
+import os
 import pandas as pd
 from flask import Flask, request, jsonify
 
@@ -21,17 +22,16 @@ def predict_superkart():
     superkart_data = request.get_json()
 
     # Extract relevant superkart features from the input data
-    sample = {
-        'Product_Weight': superkart_data['Product_Weight'],
-        'Product_Allocated_Area': superkart_data['Product_Allocated_Area'],
-        'Product_MRP': superkart_data['Product_MRP'],
-        'Store_Age_Years': superkart_data['Store_Age_Years'],
-        'Product_Sugar_Content': superkart_data['Product_Sugar_Content'],     
-        'Store_Location_City_Type': superkart_data['Store_Location_City_Type'],
-        'Store_Type': superkart_data['Store_Type'],
-        'Product_Id_char': superkart_data['Product_Id_char'],
-        'Product_Type_Category': superkart_data['Product_Type_Category'],
-        }
+   sample = {
+    'Product_Weight': superkart_data['Product_Weight'],
+    'Product_Allocated_Area': superkart_data['Product_Allocated_Area'],
+    'Product_MRP': superkart_data['Product_MRP'],
+    'Product_Sugar_Content': superkart_data['Product_Sugar_Content'],
+    'Product_Type': superkart_data['Product_Type'],
+    'Store_Size': superkart_data['Store_Size'],
+    'Store_Location_City_Type': superkart_data['Store_Location_City_Type'],
+    'Store_Type': superkart_data['Store_Type'],
+    }
 
     # Convert the extracted data into a DataFrame
     input_data = pd.DataFrame([sample])
@@ -64,4 +64,4 @@ def predict_superkart_batch():
 
 # Run the Flask app in debug mode
 if __name__ == '__main__':
-    superkart_api.run(debug=True)
+  superkart_api.run(host="0.0.0.0", port=int(os.environ.get("PORT", 7860)))
