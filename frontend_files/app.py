@@ -5,7 +5,7 @@ import os
 import requests
 import numpy as np
 
-API_URL = os.environ.get("API_URL", "http://backend:7680").rstrip("/")
+API_URL = os.environ.get("API_URL", "http://backend:7860").rstrip("/")
 API_URL_PREDICT = API_URL + "/v1/predict"
 API_URL_PREDICT_BATCH = API_URL + "/v1/predictbatch"
 
