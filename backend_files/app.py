@@ -40,7 +40,7 @@ def predict_superkart():
     prediction = model.predict(input_data).tolist()[0]
 
     # Return the prediction as a JSON response
-    return jsonify({'Predicted_MEDV': prediction})
+    return jsonify({'Predicted_Store_Sales': prediction})
 
 # Define an endpoint to predict price for a batch of houses
 @superkart_api.post('/v1/predictbatch')
@@ -55,7 +55,7 @@ def predict_superkart_batch():
     predictions = model.predict(input_data).tolist()
 
     # Add predictions to the DataFrame
-    input_data['Predicted_MEDV'] = predictions
+    input_data['Predicted_Store_Sales'] = predictions
 
     # Convert results to dictionary
     result = input_data.to_dict(orient="records")
